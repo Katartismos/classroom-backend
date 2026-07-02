@@ -7,6 +7,10 @@ const PORT = 8000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+if (!process.env.FRONTEND_URL)
+  throw new Error("FRONTEND_URL is not defined in environment variables");
+
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,

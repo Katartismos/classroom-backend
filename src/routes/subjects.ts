@@ -10,8 +10,13 @@ router.get("/", async (req, res) => {
   try {
     const { search, department, page = 1, limit = 10 } = req.query;
 
-    const currentPage = Math.max(1, +page);
-    const limitPerPage = Math.max(1, +limit);
+    const parsedPage = Number(page);
+    const parsedLimit = Number(limit);
+    if (!Number.isFinite(parsedPage) || !Number.isFinite(parsedLimit)) {
+      return res.status(400).json({ error: "Invalid page or limit." });
+    }
+    const currentPage = Math.max(1, parsedPage);
+    const limitPerPage = Math.min(100, Math.max(1, parsedLimit));
 
     const offset = (currentPage - 1) * limitPerPage;
 
@@ -29,7 +34,8 @@ router.get("/", async (req, res) => {
 
     // If department filter exists, match department name.
     if (department) {
-      filterConditions.push(ilike(departments.name, `%${department}%`));
+      const deptPattern = `%${String(department).replace(/[%_]/g, "\\$&")}%`;
+      filterConditions.push(ilike(departments.name, deptPattern));
     }
 
     // Combine all filters if using AND if they exist.
