@@ -5,12 +5,14 @@ import arcjet, {
   slidingWindow,
 } from "@arcjet/node";
 
-if (!process.env.ARCJET_KEY && process.env.NODE_ENV !== "test") {
+const key = process.env.ARCJET_KEY || (process.env.NODE_ENV === "test" ? "ajkey_test" : "");
+
+if (!key) {
   throw new Error("ARCJET_KEY environment variable is not set.");
 }
 
 const aj = arcjet({
-  key: process.env.ARCJET_KEY!,
+  key,
   rules: [
     // Shield protects your app from common attacks e.g. SQL injection
     shield({ mode: "LIVE" }),
