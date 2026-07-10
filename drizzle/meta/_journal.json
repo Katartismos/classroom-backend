@@ -8,6 +8,27 @@
       "when": 1782994399218,
       "tag": "0000_lazy_jamie_braddock",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1783672802624,
+      "tag": "0001_loving_cerise",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783675118633,
+      "tag": "0002_sticky_nomad",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1783680078694,
+      "tag": "0003_striped_alice",
+      "breakpoints": true
     }
   ]
 }
